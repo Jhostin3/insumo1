@@ -13,7 +13,6 @@ export default function Index() {
       if (supported) {
         await Linking.openURL(appURL);
       } else {
-        // Si la app no está instalada, abrir web
         await Linking.openURL(webURL);
       }
     } catch (error) {
@@ -23,7 +22,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      {/* Perfil */}
+      {}
       <ProfileDetails
         imageSource={require("../assets/images/imagen1.jpg")}
         size={140}

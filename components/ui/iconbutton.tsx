@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 interface IconButtonProps {
-  icon: JSX.Element;      // Ahora recibe un componente de icono
+  icon: JSX.Element;      
   onPress: () => void;
 }
 

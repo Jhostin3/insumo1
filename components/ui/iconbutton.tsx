@@ -1,27 +1,26 @@
-import React from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import React from "react";
+import { Pressable } from "react-native";
 
 interface IconButtonProps {
-  icon: JSX.Element;      
+  icon: React.ReactNode;
   onPress: () => void;
+  variant?: "light" | "dark";
 }
 
-const IconButton = ({ icon, onPress }: IconButtonProps) => {
+const IconButton = ({ icon, onPress, variant = "light" }: IconButtonProps) => {
+  const variantStyles =
+    variant === "dark"
+      ? "bg-gray-800"
+      : "bg-gray-200";
+
   return (
-    <Pressable style={styles.button} onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      className={`p-2 rounded-full items-center justify-center ${variantStyles}`}
+    >
       {icon}
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    padding: 10,
-    borderRadius: 50,
-    backgroundColor: '#eee',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default IconButton;

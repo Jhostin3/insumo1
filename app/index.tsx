@@ -1,82 +1,64 @@
 import "@/global.css";
-import { View, StyleSheet, Linking, Alert, Platform } from "react-native";
-import ProfileDetails from "../components/profileDetails";
-import IconButton from "../components/iconbutton";
-import Entypo from '@expo/vector-icons/Entypo';
-import AntDesign from '@expo/vector-icons/AntDesign';
+import AntDesign from "@expo/vector-icons/AntDesign";
+import Entypo from "@expo/vector-icons/Entypo";
+import React from "react";
+import { Linking, ScrollView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context"; 
+import ExperienceSection from "../components/ui/ExperienceSection";
+import IconButton from "../components/ui/iconbutton";
+import ProfileDetails from "../components/ui/profileDetails";
+import SkillsSection from "../components/ui/SkillsSection";
 
 export default function Index() {
-
-  const openSocialApp = async (appURL: string, webURL: string) => {
-    try {
-      const supported = await Linking.canOpenURL(appURL);
-      if (supported) {
-        await Linking.openURL(appURL);
-      } else {
-        await Linking.openURL(webURL);
-      }
-    } catch (error) {
-      Alert.alert('Error', 'No se pudo abrir la aplicación.');
-    }
+  const openLink = (url: string) => {
+    Linking.openURL(url);
   };
 
   return (
-    <View style={styles.container}>
-      {}
-      <ProfileDetails
-        imageSource={require("../assets/images/imagen1.jpg")}
-        size={140}
-        name="Jhostin Quijije"
-        subtitle="React Native Dev"
-      />
+    <ScrollView className="flex-1 bg-slate-100">
+      <SafeAreaView className="flex-1">
+        {}
+        <View className="items-center mt-6 mb-6">
+          <ProfileDetails
+            imageSource={require("../assets/images/imagen1.jpg")}
+            size={140}
+            name="Jhostin Quijije"
+            subtitle="React Native Dev"
+          />
 
-      {/* Botones de redes sociales */}
-      <View style={styles.socialButtons}>
-        <IconButton
-          icon={<Entypo name="instagram" size={24} color="black" />}
-          onPress={() => openSocialApp(
-            'instagram://user?username=tu_usuario',
-            'https://www.instagram.com/tu_usuario'
-          )}
-        />
-        <IconButton
-          icon={<AntDesign name="twitter" size={24} color="black" />}
-          onPress={() => openSocialApp(
-            'twitter://user?screen_name=tu_usuario',
-            'https://twitter.com/tu_usuario'
-          )}
-        />
-        <IconButton
-          icon={<AntDesign name="github" size={24} color="black" />}
-          onPress={() => openSocialApp(
-            'github://profile/tu_usuario',
-            'https://github.com/tu_usuario'
-          )}
-        />
-        <IconButton
-          icon={<Entypo name="linkedin" size={24} color="black" />}
-          onPress={() => openSocialApp(
-            'linkedin://in/tu_usuario',
-            'https://www.linkedin.com/in/tu_usuario'
-          )}
-        />
-      </View>
-    </View>
+          {}
+          <View className="flex-row mt-4 justify-center space-x-4">
+            <IconButton
+              variant="light"
+              icon={<Entypo name="instagram" size={24} color="#E4405F" />}
+              onPress={() =>
+                openLink("https://www.instagram.com/jhostin._.jq/")
+              }
+            />
+            <IconButton
+              variant="light"
+              icon={<AntDesign name="twitter" size={24} color="#1DA1F2" />}
+              onPress={() => openLink("https://x.com/Jhostin88604")}
+            />
+            <IconButton
+              variant="dark"
+              icon={<AntDesign name="github" size={24} color="#fff" />}
+              onPress={() => openLink("https://github.com/Jhostin3")}
+            />
+            <IconButton
+              variant="dark"
+              icon={<Entypo name="linkedin" size={24} color="#fff" />}
+              onPress={() => openLink("https://ec.linkedin.com/")}
+            />
+          </View>
+        </View>
+
+        {}
+        <View className="bg-slate-900 rounded-t-3xl w-screen py-6 px-4">
+          <SkillsSection />
+          <ExperienceSection />
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    padding: 20,
-  },
-  socialButtons: {
-    flexDirection: 'row',
-    marginTop: 20,
-    justifyContent: 'center',
-    gap: 16,
-  },
-});
